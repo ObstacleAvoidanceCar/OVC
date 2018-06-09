@@ -72,20 +72,72 @@ void Trick()
 		if(S1<S)
 		{
 			MotorLeft();
-			delay_ms(40);
+			delay_ms(32);
 			MotorStop();
+			delay_ms(30);
+			MotorFront();
+			delay_ms(100);
+			MotorStop();
+			delay_ms(30);
+			MotorRight();
+			delay_ms(38);
+			MotorStop();
+			delay_ms(30);
+			MotorFront();
+			delay_ms(200);
+			delay_ms(80);
+			MotorStop();
+			delay_ms(30);
+			MotorRight();
+			delay_ms(30);
+			MotorStop();
+			delay_ms(30);
+			MotorFront();
+			delay_ms(100);
+			MotorStop();
+			delay_ms(30);
+			MotorLeft();
+			delay_ms(58);
+			MotorStop();
+			delay_ms(30);
 		}
 		else
 		{
 			MotorRight();
+			delay_ms(30);
+			MotorStop();
+			delay_ms(30);
+			MotorFront();
+			delay_ms(100);
+			MotorStop();
+			delay_ms(30);
+			MotorLeft();
 			delay_ms(40);
 			MotorStop();
+			delay_ms(30);
+			MotorFront();
+			delay_ms(200);
+			delay_ms(80);
+			MotorStop();
+			delay_ms(30);
+			MotorLeft();
+			delay_ms(40);
+			MotorStop();
+			delay_ms(30);
+			MotorFront();
+			delay_ms(100);
+			MotorStop();
+			delay_ms(30);
+			MotorRight();
+			delay_ms(58);
+			MotorStop();
+			delay_ms(30);
 		}
 }
 
 void main()
 {
-	unsigned long S_bak;
+	unsigned long S_bak1,S_bak2;
 	while(1)
 	{
 		for(ti=0;ti<4;ti++)
@@ -93,30 +145,26 @@ void main()
 			SMCenter();
 		}
 		UTConut();
-		S_bak=S;
+		S_bak1=S;
 		UTConut();
-		S=(S_bak+S)/2;
+		S_bak2=S;
+		UTConut();
+		S=(S_bak1+S_bak2+S)/3;
 		delay_ms(2);
 		for(ti=0;ti<3;ti++)
 		{
 			UTDisplay();
 		}
-		while((S/1000!=0)||((S/100)%10!=0)||((S/10)%10>4))
+		while((S/1000!=0)||((S/100)%10!=0)||(((S/10)%10*10+S%10)>18))
 		{
 			MotorFront();
-			for(ti=0;ti<4;ti++)
-			{
-				SMCenter();
-			}
 			UTConut();
-			S_bak=S;
+			S_bak1=S;
 			UTConut();
-			S=(S_bak+S)/2;
-			delay_ms(2);
-			for(ti=0;ti<3;ti++)
-			{
-				UTDisplay();
-			}
+			S_bak2=S;
+			UTConut();
+			S=(S_bak1+S_bak2+S)/3;
+			UTDisplay();
 		}
 		Trick();
 	}
